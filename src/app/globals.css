@@ -1,0 +1,247 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * AWS SBG VJIT design system.
+ * Tailwind v4 CSS-first config. Raw brand values live in :root (overridden in
+ * .dark), then map into utilities through @theme inline. No hardcoded colors,
+ * spacing, or fonts belong in components; everything routes through these tokens.
+ */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Amazon Ember font faces. Drop the .ttf files into /public/fonts/ (see
+ * brand-assets/fonts/README.md). Until then the fallback stacks below apply,
+ * so the build and dev server stay green without the licensed files. */
+@font-face {
+  font-family: "Amazon Ember Display";
+  src: url("/fonts/AmazonEmberDisplay_Lt.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amazon Ember Display";
+  src: url("/fonts/AmazonEmberDisplay_Rg.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amazon Ember Display";
+  src: url("/fonts/AmazonEmberDisplay_Md.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amazon Ember Display";
+  src: url("/fonts/AmazonEmberDisplay_Bd.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amazon Ember Display";
+  src: url("/fonts/AmazonEmberDisplay_He.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amazon Ember Mono";
+  src: url("/fonts/AmazonEmberMono_Rg.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amazon Ember Mono";
+  src: url("/fonts/AmazonEmberMono_Bd.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amazon Ember Duospace";
+  src: url("/fonts/Amazon Ember Duospace.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amazon Ember Duospace";
+  src: url("/fonts/Amazon Ember Duospace Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Brand palette (light). These raw values flip in .dark below. */
+  --ink: #161d27;
+  --ink-soft: #2a3140;
+  --ink-muted: #6b7280;
+  --paper: #fafaf7;
+  --paper-warm: #f4f1ea;
+  --orange: #ff9900;
+  --blue: #43b4ff;
+  --purple: #ad5cff;
+  --magenta: #ff57ea;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+
+  /* shadcn semantic tokens mapped onto the brand palette */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: #ffffff;
+  --card-foreground: var(--ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--ink);
+  --primary: var(--orange);
+  --primary-foreground: #161d27;
+  --secondary: var(--paper-warm);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-warm);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--paper-warm);
+  --accent-foreground: var(--ink);
+  --destructive: var(--danger);
+  --destructive-foreground: #ffffff;
+  --border: #e4e0d6;
+  --input: #e4e0d6;
+  --ring: var(--orange);
+
+  --radius: 0.25rem;
+}
+
+.dark {
+  --ink: #fafaf7;
+  --ink-soft: #cbd2de;
+  --ink-muted: #8b93a1;
+  --paper: #0b0f17;
+  --paper-warm: #131826;
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--paper-warm);
+  --card-foreground: var(--ink);
+  --popover: var(--paper-warm);
+  --popover-foreground: var(--ink);
+  --primary: var(--orange);
+  --primary-foreground: #161d27;
+  --secondary: #1b2233;
+  --secondary-foreground: var(--ink);
+  --muted: #1b2233;
+  --muted-foreground: var(--ink-muted);
+  --accent: #1b2233;
+  --accent-foreground: var(--ink);
+  --destructive: var(--danger);
+  --destructive-foreground: #ffffff;
+  --border: #242c3d;
+  --input: #242c3d;
+  --ring: var(--orange);
+}
+
+@theme inline {
+  /* Brand color utilities: text-ink, bg-paper, text-orange, border-ink-muted */
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+  --color-paper: var(--paper);
+  --color-paper-warm: var(--paper-warm);
+  --color-orange: var(--orange);
+  --color-blue: var(--blue);
+  --color-purple: var(--purple);
+  --color-magenta: var(--magenta);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+
+  /* shadcn semantic utilities */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Fonts (Tailwind exposes these as font-display / font-mono / font-duo) */
+  --font-display:
+    "Amazon Ember Display", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  --font-mono:
+    "Amazon Ember Mono", ui-monospace, "SFMono-Regular", "Menlo", "Consolas",
+    monospace;
+  --font-duo:
+    "Amazon Ember Duospace", "Amazon Ember Mono", ui-monospace, "Consolas",
+    monospace;
+
+  /* Radius scale (sharp corners are on-brand) */
+  --radius-sm: calc(var(--radius) - 0.0625rem);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 0.125rem);
+  --radius-xl: calc(var(--radius) + 0.25rem);
+
+  /* Motion */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background-color: var(--orange);
+    color: #161d27;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+  .grid-backdrop {
+    background-image:
+      linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+    mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
