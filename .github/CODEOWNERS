@@ -1,0 +1,23 @@
+# Code owners. Every top-level area maps to @vedant7007 for now.
+# Team members: edit these to take ownership of your areas.
+# Syntax: <path> <owner(s)>
+
+# Default owner for everything
+*                       @vedant7007
+
+# Top-level folders
+/src/app/               @vedant7007
+/src/components/        @vedant7007
+/src/lib/               @vedant7007
+/scripts/               @vedant7007
+/brand-assets/          @vedant7007
+/.github/               @vedant7007
+
+# Suggested area ownership once handles are added (edit the placeholders):
+# /src/app/(marketing)/events/     @mohiuddin-handle
+# /src/app/admin/events/           @mohiuddin-handle
+# /src/app/console/                @jashwanth-handle
+# /src/app/(marketing)/projects/   @akshithi-handle
+# /src/app/(marketing)/members/    @aarush-handle
+# /src/app/(marketing)/roadmap/    @hanu-handle
+# /src/app/(marketing)/services/   @rishikesh-handle
