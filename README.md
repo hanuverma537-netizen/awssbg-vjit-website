@@ -99,9 +99,11 @@ Sharp corners are on brand (`--radius: 0.25rem`). Motion respects
 | Events, event detail, admin events, check-in, registration + checkin APIs | Mohiuddin |
 | Console, profile, my-events, settings, sign-in, middleware                | Jashwanth |
 | Projects, project detail, admin projects                                  | Akshithi  |
-| Members, team, about                                                      | Aarush    |
-| Roadmap, admin roadmap, join                                              | Hanu      |
+| Members directory (`/members`)                                            | Aarush    |
+| Roadmap, admin roadmap                                                    | Hanu      |
 | Services, event ticket email, ticket QR, 404                              | Rishikesh |
+| About, team                                                               | Abhinav   |
+| Join, privacy, code of conduct                                            | Laasya    |
 
 ## Contribution rules
 

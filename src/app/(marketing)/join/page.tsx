@@ -1,5 +1,5 @@
 /*
- * Owner: Hanu
+ * Owner: Laasya
  * Status: skeleton
  * Acceptance criteria:
  *   - Explain who can join and how, with a clear primary action to /signin.
@@ -26,7 +26,7 @@ export default function JoinPage() {
         eyebrow="Get started"
         title="Join AWS SBG VJIT"
         description="Anyone on campus who wants to build in the cloud is welcome."
-        owner="Hanu"
+        owner="Laasya"
         reference="src/app/(marketing)/page.tsx"
         criteria={[
           "Explain eligibility and the join steps clearly.",

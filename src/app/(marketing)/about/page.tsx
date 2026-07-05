@@ -1,5 +1,5 @@
 /*
- * Owner: Aarush
+ * Owner: Abhinav
  * Status: skeleton
  * Acceptance criteria:
  *   - Real story of AWS SBG VJIT: what it is, who it is for, how to get involved.
@@ -22,7 +22,7 @@ export default function AboutPage() {
       <RouteSkeleton
         eyebrow="About"
         title="About AWS SBG VJIT"
-        owner="Aarush"
+        owner="Abhinav"
         reference="src/app/(marketing)/page.tsx"
         criteria={[
           "Write the real origin and mission (no invented stats).",

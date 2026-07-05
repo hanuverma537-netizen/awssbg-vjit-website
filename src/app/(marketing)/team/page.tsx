@@ -1,5 +1,5 @@
 /*
- * Owner: Aarush
+ * Owner: Abhinav
  * Status: skeleton (reads public core/lead members)
  * Acceptance criteria:
  *   - Show core and lead members grouped by team.
@@ -30,7 +30,7 @@ export default async function TeamPage() {
       <RouteSkeleton
         eyebrow="The core"
         title="Team"
-        owner="Aarush"
+        owner="Abhinav"
         reference="src/app/(marketing)/page.tsx"
         criteria={[
           "Group core and lead members by their team.",
