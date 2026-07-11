@@ -169,7 +169,13 @@ export const EventTicketEmail = ({
               <table cellPadding={0} cellSpacing={0} border={0} width="100%">
                 <tbody>
                   <tr>
-                    <td style={{ padding: "6px 0", verticalAlign: "top", width: "72px" }}>
+                    <td
+                      style={{
+                        padding: "6px 0",
+                        verticalAlign: "top",
+                        width: "72px",
+                      }}
+                    >
                       <Text
                         className="text-muted"
                         style={{
@@ -197,7 +203,13 @@ export const EventTicketEmail = ({
                     </td>
                   </tr>
                   <tr>
-                    <td style={{ padding: "6px 0", verticalAlign: "top", width: "72px" }}>
+                    <td
+                      style={{
+                        padding: "6px 0",
+                        verticalAlign: "top",
+                        width: "72px",
+                      }}
+                    >
                       <Text
                         className="text-muted"
                         style={{
@@ -323,6 +335,8 @@ export const EventTicketEmail = ({
  * Render the event ticket confirmation email as a self-contained HTML string.
  * Call this on the server, pass the result to resend.emails.send() as `html`.
  */
-export async function renderEventTicketEmail(props: EventTicketEmailProps): Promise<string> {
+export async function renderEventTicketEmail(
+  props: EventTicketEmailProps,
+): Promise<string> {
   return await render(<EventTicketEmail {...props} />);
 }

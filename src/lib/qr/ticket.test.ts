@@ -15,7 +15,11 @@
 
 import assert from "node:assert/strict";
 import { describe, it, before } from "node:test";
-import { generateTicketCode, verifyTicketCode, generateTicketQrImage } from "./ticket";
+import {
+  generateTicketCode,
+  verifyTicketCode,
+  generateTicketQrImage,
+} from "./ticket";
 
 describe("generateTicketCode", () => {
   it("returns a dot-separated three-part token", () => {

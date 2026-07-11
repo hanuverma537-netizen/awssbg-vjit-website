@@ -49,14 +49,20 @@ const getRoleColors = (role: string) => {
   };
 };
 
-export function MembersDirectoryClient({ initialMembers }: { initialMembers: MemberView[] }) {
+export function MembersDirectoryClient({
+  initialMembers,
+}: {
+  initialMembers: MemberView[];
+}) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedYear, setSelectedYear] = useState("All");
   const [selectedBranch, setSelectedBranch] = useState("All");
   const [selectedMember, setSelectedMember] = useState<MemberView | null>(null);
 
   // Dynamic branch options derived from active member data
-  const branches = Array.from(new Set(initialMembers.map((m) => m.branch).filter(Boolean)));
+  const branches = Array.from(
+    new Set(initialMembers.map((m) => m.branch).filter(Boolean)),
+  );
   const branchOptions = ["All", ...branches];
 
   // Map batch years to current academic study years dynamically
@@ -77,7 +83,9 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
 
   // Dynamic study year options
   const years = Array.from(
-    new Set(initialMembers.map((m) => getStudyYear(m.batchYear)).filter(Boolean)),
+    new Set(
+      initialMembers.map((m) => getStudyYear(m.batchYear)).filter(Boolean),
+    ),
   );
   const yearOptions = ["All", ...years];
 
@@ -85,12 +93,17 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
   const filteredMembers = initialMembers.filter((member) => {
     const matchesSearch =
       member.displayName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (member.team && member.team.toLowerCase().includes(searchQuery.toLowerCase())) ||
-      member.skills.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      (member.team &&
+        member.team.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      member.skills.some((s) =>
+        s.toLowerCase().includes(searchQuery.toLowerCase()),
+      ) ||
       member.role.toLowerCase().includes(searchQuery.toLowerCase());
 
-    const matchesYear = selectedYear === "All" || getStudyYear(member.batchYear) === selectedYear;
-    const matchesBranch = selectedBranch === "All" || member.branch === selectedBranch;
+    const matchesYear =
+      selectedYear === "All" || getStudyYear(member.batchYear) === selectedYear;
+    const matchesBranch =
+      selectedBranch === "All" || member.branch === selectedBranch;
 
     return matchesSearch && matchesYear && matchesBranch;
   });
@@ -102,9 +115,11 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
       {/* ── STATS DASHBOARD ───────────────────────────────── */}
       <div className="flex justify-start">
         <div className="bg-card border-border/80 flex items-center gap-4 rounded-sm border px-6 py-4 backdrop-blur-sm">
-          <GraduationCap className="size-6 text-orange" />
+          <GraduationCap className="text-orange size-6" />
           <div className="flex flex-col">
-            <span className="font-display text-2xl font-bold">{totalCount}</span>
+            <span className="font-display text-2xl font-bold">
+              {totalCount}
+            </span>
             <span className="text-muted-foreground text-xs">Total Members</span>
           </div>
         </div>
@@ -120,20 +135,20 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
             placeholder="Search by name, role, team or skills..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-paper/50 border-border/80 rounded-sm py-2.5 pr-4 pl-11 text-sm outline-none focus:border-orange focus:ring-1 focus:ring-orange/50 transition-all placeholder:text-muted-foreground/60"
+            className="bg-paper/50 border-border/80 focus:border-orange focus:ring-orange/50 placeholder:text-muted-foreground/60 w-full rounded-sm py-2.5 pr-4 pl-11 text-sm transition-all outline-none focus:ring-1"
           />
         </div>
 
         {/* Dropdown Filters */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="flex flex-col">
-            <span className="font-mono text-[10px] tracking-wide text-muted-foreground uppercase mb-1.5">
+            <span className="text-muted-foreground mb-1.5 font-mono text-[10px] tracking-wide uppercase">
               Year of Study
             </span>
             <select
               value={selectedYear}
               onChange={(e) => setSelectedYear(e.target.value)}
-              className="w-full bg-paper border border-border/80 rounded-sm py-2 px-3 text-xs outline-none focus:border-orange transition-all cursor-pointer"
+              className="bg-paper border-border/80 focus:border-orange w-full cursor-pointer rounded-sm border px-3 py-2 text-xs transition-all outline-none"
             >
               {yearOptions.map((y) => (
                 <option key={y} value={y}>
@@ -144,13 +159,13 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
           </div>
 
           <div className="flex flex-col">
-            <span className="font-mono text-[10px] tracking-wide text-muted-foreground uppercase mb-1.5">
+            <span className="text-muted-foreground mb-1.5 font-mono text-[10px] tracking-wide uppercase">
               Branch/Department
             </span>
             <select
               value={selectedBranch}
               onChange={(e) => setSelectedBranch(e.target.value)}
-              className="w-full bg-paper border border-border/80 rounded-sm py-2 px-3 text-xs outline-none focus:border-orange transition-all cursor-pointer"
+              className="bg-paper border-border/80 focus:border-orange w-full cursor-pointer rounded-sm border px-3 py-2 text-xs transition-all outline-none"
             >
               {branchOptions.map((b) => (
                 <option key={b} value={b}>
@@ -175,16 +190,16 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
               const roleColors = getRoleColors(member.role);
 
               return (
-                <div key={member.id} className="relative group">
+                <div key={member.id} className="group relative">
                   <Link
                     href={routes.member(member.username)}
-                    className="bg-card hover:border-orange border-border/80 flex flex-col justify-between rounded-sm border p-4 h-full transition-all hover:bg-card/95 hover:shadow-md hover:shadow-orange/5"
+                    className="bg-card hover:border-orange border-border/80 hover:bg-card/95 hover:shadow-orange/5 flex h-full flex-col justify-between rounded-sm border p-4 transition-all hover:shadow-md"
                   >
                     <div>
                       {/* Header: Photo */}
-                      <div className="flex items-start justify-between mb-4">
+                      <div className="mb-4 flex items-start justify-between">
                         <div
-                          className={`relative size-12 overflow-hidden rounded-full flex items-center justify-center font-bold text-sm border ${roleColors.border} ${roleColors.bg}`}
+                          className={`relative flex size-12 items-center justify-center overflow-hidden rounded-full border text-sm font-bold ${roleColors.border} ${roleColors.bg}`}
                         >
                           {member.photoURL ? (
                             <Image
@@ -203,35 +218,39 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
                       </div>
 
                       {/* Member Identity */}
-                      <h3 className="font-display font-semibold tracking-tight text-ink group-hover:text-orange transition-colors">
+                      <h3 className="font-display text-ink group-hover:text-orange font-semibold tracking-tight transition-colors">
                         {member.displayName}
                       </h3>
-                      <p className={`font-mono text-[10px] tracking-wide uppercase font-semibold mt-1 ${roleColors.text}`}>
-                        {member.role === "core" && member.team === "Core" ? "Captain" : member.role}
+                      <p
+                        className={`mt-1 font-mono text-[10px] font-semibold tracking-wide uppercase ${roleColors.text}`}
+                      >
+                        {member.role === "core" && member.team === "Core"
+                          ? "Captain"
+                          : member.role}
                       </p>
-                      <p className="text-muted-foreground text-xs mt-0.5">
+                      <p className="text-muted-foreground mt-0.5 text-xs">
                         {getStudyYear(member.batchYear)} &bull; {member.branch}
                       </p>
 
                       {/* Bio Snip */}
-                      <p className="text-muted-foreground text-xs mt-3 line-clamp-2 leading-relaxed">
+                      <p className="text-muted-foreground mt-3 line-clamp-2 text-xs leading-relaxed">
                         {member.bio}
                       </p>
                     </div>
 
                     {/* Skills Cloud */}
-                    <div className="mt-5 pt-3 border-t">
-                      <div className="flex flex-wrap gap-1 mb-4 h-[22px] overflow-hidden">
+                    <div className="mt-5 border-t pt-3">
+                      <div className="mb-4 flex h-[22px] flex-wrap gap-1 overflow-hidden">
                         {member.skills.slice(0, 3).map((skill) => (
                           <span
                             key={skill}
-                            className="bg-paper border border-border/80 rounded-sm px-1.5 py-0.5 text-[9px] text-muted-foreground"
+                            className="bg-paper border-border/80 text-muted-foreground rounded-sm border px-1.5 py-0.5 text-[9px]"
                           >
                             {skill}
                           </span>
                         ))}
                         {member.skills.length > 3 && (
-                          <span className="text-[9px] text-muted-foreground/60 px-1 py-0.5">
+                          <span className="text-muted-foreground/60 px-1 py-0.5 text-[9px]">
                             +{member.skills.length - 3}
                           </span>
                         )}
@@ -239,7 +258,7 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
 
                       {/* Actions */}
                       <div className="flex items-center justify-between">
-                        <span className="font-mono text-[10px] font-bold text-orange tracking-wide group-hover:underline">
+                        <span className="text-orange font-mono text-[10px] font-bold tracking-wide group-hover:underline">
                           View profile &rarr;
                         </span>
 
@@ -249,7 +268,7 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
                             e.stopPropagation();
                             setSelectedMember(member);
                           }}
-                          className="text-[10px] font-mono text-muted-foreground hover:text-ink border border-border hover:border-orange px-2 py-0.5 rounded-sm transition-all"
+                          className="text-muted-foreground hover:text-ink border-border hover:border-orange rounded-sm border px-2 py-0.5 font-mono text-[10px] transition-all"
                         >
                           Quick Peek
                         </button>
@@ -265,12 +284,15 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="bg-card border-border/80 border flex flex-col items-center justify-center text-center p-12 max-w-md mx-auto rounded-sm backdrop-blur-sm"
+            className="bg-card border-border/80 mx-auto flex max-w-md flex-col items-center justify-center rounded-sm border p-12 text-center backdrop-blur-sm"
           >
-            <AlertCircle className="size-8 text-muted-foreground mb-4" />
-            <h3 className="font-display font-semibold text-ink">No Members Found</h3>
-            <p className="text-muted-foreground text-xs mt-1.5 leading-relaxed">
-              We couldn&apos;t find any members matching your current filters. Try resetting the criteria.
+            <AlertCircle className="text-muted-foreground mb-4 size-8" />
+            <h3 className="font-display text-ink font-semibold">
+              No Members Found
+            </h3>
+            <p className="text-muted-foreground mt-1.5 text-xs leading-relaxed">
+              We couldn&apos;t find any members matching your current filters.
+              Try resetting the criteria.
             </p>
             <button
               onClick={() => {
@@ -278,7 +300,7 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
                 setSelectedYear("All");
                 setSelectedBranch("All");
               }}
-              className="bg-primary hover:bg-orange/85 text-primary-foreground font-mono text-xs tracking-wider uppercase px-4 py-2 mt-5 rounded-sm shadow-sm transition-colors cursor-pointer"
+              className="bg-primary hover:bg-orange/85 text-primary-foreground mt-5 cursor-pointer rounded-sm px-4 py-2 font-mono text-xs tracking-wider uppercase shadow-sm transition-colors"
             >
               Reset Filters
             </button>
@@ -295,11 +317,11 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedMember(null)}
-              className="absolute inset-0 bg-ink/80 backdrop-blur-sm"
+              className="bg-ink/80 absolute inset-0 backdrop-blur-sm"
             />
             <motion.div
               layoutId={`member-card-${selectedMember.id}`}
-              className="bg-card border-border/80 relative z-10 w-full max-w-lg overflow-hidden border rounded-sm p-6 sm:p-8 shadow-2xl"
+              className="bg-card border-border/80 relative z-10 w-full max-w-lg overflow-hidden rounded-sm border p-6 shadow-2xl sm:p-8"
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
@@ -308,15 +330,15 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
               {/* Close Button */}
               <button
                 onClick={() => setSelectedMember(null)}
-                className="text-muted-foreground hover:text-ink absolute top-4 right-4 rounded-sm p-1 transition-colors hover:bg-paper cursor-pointer"
+                className="text-muted-foreground hover:text-ink hover:bg-paper absolute top-4 right-4 cursor-pointer rounded-sm p-1 transition-colors"
               >
                 <X className="size-4" />
               </button>
 
               {/* Identity Header */}
-              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-6">
+              <div className="mb-6 flex flex-col items-center gap-4 sm:flex-row sm:items-start">
                 <div
-                  className={`size-16 relative overflow-hidden rounded-full flex items-center justify-center font-bold text-2xl border ${getRoleColors(selectedMember.role).border} ${getRoleColors(selectedMember.role).bg}`}
+                  className={`relative flex size-16 items-center justify-center overflow-hidden rounded-full border text-2xl font-bold ${getRoleColors(selectedMember.role).border} ${getRoleColors(selectedMember.role).bg}`}
                 >
                   {selectedMember.photoURL ? (
                     <Image
@@ -333,25 +355,29 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
                   )}
                 </div>
 
-                <div className="text-center sm:text-left pt-1">
-                  <h3 className="font-display font-bold text-xl leading-none text-ink">
+                <div className="pt-1 text-center sm:text-left">
+                  <h3 className="font-display text-ink text-xl leading-none font-bold">
                     {selectedMember.displayName}
                   </h3>
-                  <p className={`font-mono text-xs tracking-wider uppercase font-semibold mt-2 ${getRoleColors(selectedMember.role).text}`}>
-                    {selectedMember.role === "core" && selectedMember.team === "Core"
+                  <p
+                    className={`mt-2 font-mono text-xs font-semibold tracking-wider uppercase ${getRoleColors(selectedMember.role).text}`}
+                  >
+                    {selectedMember.role === "core" &&
+                    selectedMember.team === "Core"
                       ? "Club Captain"
                       : `${selectedMember.role} • ${selectedMember.team}`}
                   </p>
-                  <p className="text-muted-foreground text-xs mt-1">
-                    {getStudyYear(selectedMember.batchYear)} &bull; {selectedMember.branch} &bull; VJIT
+                  <p className="text-muted-foreground mt-1 text-xs">
+                    {getStudyYear(selectedMember.batchYear)} &bull;{" "}
+                    {selectedMember.branch} &bull; VJIT
                   </p>
                 </div>
               </div>
 
               {/* Bio block */}
-              <div className="space-y-5 mb-6">
-                <div className="bg-paper/40 border border-border/60 rounded-sm p-4">
-                  <h4 className="font-mono text-[9px] font-bold text-muted-foreground tracking-wide uppercase mb-1.5">
+              <div className="mb-6 space-y-5">
+                <div className="bg-paper/40 border-border/60 rounded-sm border p-4">
+                  <h4 className="text-muted-foreground mb-1.5 font-mono text-[9px] font-bold tracking-wide uppercase">
                     Biography
                   </h4>
                   <p className="text-muted-foreground text-xs leading-relaxed">
@@ -361,14 +387,14 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
 
                 {/* Core skills cloud */}
                 <div>
-                  <h4 className="font-mono text-[9px] font-bold text-muted-foreground tracking-wide uppercase mb-2">
+                  <h4 className="text-muted-foreground mb-2 font-mono text-[9px] font-bold tracking-wide uppercase">
                     Core Skills
                   </h4>
                   <div className="flex flex-wrap gap-1.5">
                     {selectedMember.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="bg-paper border border-border rounded-sm px-2.5 py-1 text-xs text-muted-foreground hover:border-orange/40 hover:text-ink transition-colors"
+                        className="bg-paper border-border text-muted-foreground hover:border-orange/40 hover:text-ink rounded-sm border px-2.5 py-1 text-xs transition-colors"
                       >
                         {skill}
                       </span>
@@ -378,8 +404,8 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
               </div>
 
               {/* Modal footer & socials */}
-              <div className="flex items-center justify-between pt-4 border-t border-border/80">
-                <span className="font-mono text-[9px] tracking-wide text-muted-foreground/60 uppercase">
+              <div className="border-border/80 flex items-center justify-between border-t pt-4">
+                <span className="text-muted-foreground/60 font-mono text-[9px] tracking-wide uppercase">
                   AWS Student Builder Group VJIT
                 </span>
 
@@ -389,7 +415,7 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
                       href={selectedMember.socials.github}
                       target="_blank"
                       rel="noreferrer"
-                      className="border border-border hover:border-ink hover:text-ink text-muted-foreground size-9 rounded-sm flex items-center justify-center transition-colors"
+                      className="border-border hover:border-ink hover:text-ink text-muted-foreground flex size-9 items-center justify-center rounded-sm border transition-colors"
                       aria-label="GitHub Profile"
                     >
                       <Github className="size-4" />
@@ -400,7 +426,7 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
                       href={selectedMember.socials.linkedin}
                       target="_blank"
                       rel="noreferrer"
-                      className="border border-border hover:border-blue hover:text-blue text-muted-foreground size-9 rounded-sm flex items-center justify-center transition-colors"
+                      className="border-border hover:border-blue hover:text-blue text-muted-foreground flex size-9 items-center justify-center rounded-sm border transition-colors"
                       aria-label="LinkedIn Profile"
                     >
                       <Linkedin className="size-4" />
@@ -411,7 +437,7 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
                       href={selectedMember.socials.twitter}
                       target="_blank"
                       rel="noreferrer"
-                      className="border border-border hover:border-sky-500 hover:text-sky-500 text-muted-foreground size-9 rounded-sm flex items-center justify-center transition-colors"
+                      className="border-border text-muted-foreground flex size-9 items-center justify-center rounded-sm border transition-colors hover:border-sky-500 hover:text-sky-500"
                       aria-label="Twitter Profile"
                     >
                       <Twitter className="size-4" />
@@ -422,7 +448,7 @@ export function MembersDirectoryClient({ initialMembers }: { initialMembers: Mem
                       href={selectedMember.socials.website}
                       target="_blank"
                       rel="noreferrer"
-                      className="border border-border hover:border-orange hover:text-orange text-muted-foreground size-9 rounded-sm flex items-center justify-center transition-colors"
+                      className="border-border hover:border-orange hover:text-orange text-muted-foreground flex size-9 items-center justify-center rounded-sm border transition-colors"
                       aria-label="Personal Website"
                     >
                       <Globe className="size-4" />

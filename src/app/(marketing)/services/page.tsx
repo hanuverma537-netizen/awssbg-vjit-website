@@ -243,7 +243,7 @@ export default function ServicesPage() {
             <FadeUp key={pillar.key} index={i}>
               <a
                 href={`#pillar-${pillar.key}`}
-                className="bg-card hover:border-orange group flex h-full flex-col gap-3 rounded-sm border p-6 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="bg-card hover:border-orange group focus-visible:ring-ring flex h-full flex-col gap-3 rounded-sm border p-6 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
                 aria-label={`Jump to the ${pillar.title} pillar section`}
               >
                 <BrandIcon
@@ -331,8 +331,10 @@ function PillarSection({
             </p>
             {/* Expectation callout */}
             <div className="border-orange/30 bg-orange/5 rounded-sm border-l-2 px-4 py-3">
-              <p className="text-sm font-medium leading-relaxed">
-                <span className="text-orange font-semibold">What to expect: </span>
+              <p className="text-sm leading-relaxed font-medium">
+                <span className="text-orange font-semibold">
+                  What to expect:{" "}
+                </span>
                 {pillar.expectation}
               </p>
             </div>
@@ -341,7 +343,10 @@ function PillarSection({
 
         {/* Right / activity list */}
         <FadeUp delay={0.1}>
-          <ul className="flex flex-col gap-3" aria-label={`${pillar.title} activities`}>
+          <ul
+            className="flex flex-col gap-3"
+            aria-label={`${pillar.title} activities`}
+          >
             {pillar.activities.map((activity, j) => (
               <li
                 key={j}
